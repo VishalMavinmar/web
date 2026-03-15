@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order - Online Food Delivery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/hover-min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Order page specific styles */
+        .order-section {
+            padding: 120px 0 60px;
+            background: var(--light-bg);
+            min-height: 100vh;
+        }
+        
+        .order-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .order-summary {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            height: fit-content;
+        }
+        
+        .order-summary h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+        
+        .order-items {
+            margin-bottom: 25px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            gap: 15px;
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-item-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .order-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .order-item-details {
+            flex: 1;
+        }
+        
+        .order-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+        
+        .order-item-price {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .order-item-quantity {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .order-item-total {
+            font-weight: 700;
+            color: var(--primary-color);
+            min-width: 80px;
+            text-align: right;
+            font-size: 1.1rem;
+        }
+        
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-top: 2px solid var(--border-color);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .order-total-amount {
+            color: var(--primary-color);
+        }
+        
+        .delivery-form {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .delivery-form h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .form-group label span {
+            color: #ff4444;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(196, 155, 99, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .payment-methods {
+            margin: 25px 0;
+        }
+        
+        .payment-methods h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .payment-option:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .payment-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+        }
+        
+        .payment-option label {
+            flex: 1;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .confirm-order-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+        
+        .confirm-order-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .confirm-order-btn i {
+            margin-right: 8px;
+        }
+        
+        .empty-order {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .empty-order i {
+            font-size: 5rem;
+            color: var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .empty-order p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .back-to-menu {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .back-to-menu:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Cart badge styling */
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .order-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-section {
+                padding: 100px 0 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="navbar">
+        <nav class="navbar-menu navbar-fixed-top">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html" title="Logo">
+                        <img src="image.png" alt="Logo" class="img-responsive">
+                    </a>
+                </div>
+                <div class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="menu text-right">
+                    <ul id="menu-list">
+                        <li><a class="hvr-underline-from-center" href="index.html">Home</a></li>
+                        <li><a class="hvr-underline-from-center" href="foods.html">Foods</a></li>
+                        <li><a class="hvr-underline-from-center" href="order.html">Order</a></li>
+                        <li><a class="hvr-underline-from-center" href="contact.html">Contact</a></li>
+                        <li style="position: relative;">
+                            <a id="shopping-cart" class="shopping-cart">
+                                <i class="fa fa-cart-arrow-down"></i>
+                                <span class="badge">0</span>
+                            </a>
+                            <div id="cart-content" class="cart-content"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Order Section -->
+    <section class="order-section">
+        <div class="order-container">
+            <!-- Order Summary Column -->
+            <div class="order-summary">
+                <h2><i class="fa fa-shopping-bag"></i> Your Order</h2>
+                <div id="order-items-container" class="order-items">
+                    <!-- Items will be loaded here -->
+                </div>
+                <div id="order-total-container" class="order-total">
+                    <!-- Total will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Delivery Details Column -->
+            <div class="delivery-form" id="delivery-form">
+                <h2><i class="fa fa-truck"></i> Delivery Details</h2>
+                <form id="order-form">
+                    <div class="form-group">
+                        <label>Full Name <span>*</span></label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Phone Number <span>*</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Delivery Address <span>*</span></label>
+                        <textarea id="address" name="address" placeholder="Enter your complete address" required></textarea>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <h3>Payment Method</h3>
+                        <div class="payment-option">
+                            <input type="radio" id="cash" name="payment" value="Cash on Delivery" checked>
+                            <label for="cash">Cash on Delivery</label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="card" name="payment" value="Credit/Debit Card">
+                            <label for="card">Credit/Debit Card</label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="upi" name="payment" value="UPI">
+                            <label for="upi">UPI / Google Pay / PhonePe</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="confirm-order-btn">
+                        <i class="fa fa-check-circle"></i> Confirm Order
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About Us</h3>
+                <p>Welcome to Café Crush – Where Every Sip Sparks a Story! At Café Crush, we blend passion, flavor, and community into every cup we serve.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="foods.html">Foods</a></li>
+                    <li><a href="order.html">Order</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 All Rights Reserved | Designed by <a href="#">Vishal Mavinmar</a></p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Load and display order items
+            function loadOrderItems() {
+                const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                const orderItemsContainer = document.getElementById('order-items-container');
+                const orderTotalContainer = document.getElementById('order-total-container');
+                const deliveryForm = document.getElementById('delivery-form');
+                
+                console.log('Loaded cart items:', cartItems); // Debug log
+                
+                if (!cartItems || cartItems.length === 0) {
+                    // Show empty cart message
+                    orderItemsContainer.innerHTML = `
+                        <div class="empty-order">
+                            <i class="fa fa-shopping-cart"></i>
+                            <p>Your cart is empty</p>
+                            <a href="foods.html" class="back-to-menu">Browse Foods</a>
+                        </div>
+                    `;
+                    orderTotalContainer.innerHTML = '';
+                    
+                    // Hide delivery form if cart is empty
+                    if (deliveryForm) {
+                        deliveryForm.style.display = 'none';
+                    }
+                    
+                    // Update badge
+                    const badge = document.querySelector('.badge');
+                    if (badge) badge.innerText = '0';
+                    
+                    return;
+                }
+                
+                // Show delivery form
+                if (deliveryForm) {
+                    deliveryForm.style.display = 'block';
+                }
+                
+                // Calculate total
+                let total = 0;
+                let itemsHTML = '';
+                
+                cartItems.forEach(item => {
+                    // Ensure we have all required properties
+                    const foodName = item.foodName || item.name || 'Unknown Item';
+                    const foodPrice = parseFloat(item.foodPrice || item.price || 0);
+                    const qty = parseInt(item.qty || item.quantity || 1);
+                    const itemTotal = foodPrice * qty;
+                    total += itemTotal;
+                    
+                    itemsHTML += `
+                        <div class="order-item">
+                            <div class="order-item-img">
+                                <img src="${item.image || 'https://via.placeholder.com/70'}" 
+                                     alt="${foodName}"
+                                     onerror="this.src='https://via.placeholder.com/70'">
+                            </div>
+                            <div class="order-item-details">
+                                <div class="order-item-name">${foodName}</div>
+                                <div class="order-item-price">$${foodPrice.toFixed(2)}</div>
+                                <div class="order-item-quantity">Quantity: ${qty}</div>
+                            </div>
+                            <div class="order-item-total">$${itemTotal.toFixed(2)}</div>
+                        </div>
+                    `;
+                });
+                
+                orderItemsContainer.innerHTML = itemsHTML;
+                
+                // Update total
+                orderTotalContainer.innerHTML = `
+                    <span>Total Amount:</span>
+                    <span class="order-total-amount">$${total.toFixed(2)}</span>
+                `;
+                
+                // Update cart badge in navigation
+                const badge = document.querySelector('.badge');
+                if (badge) {
+                    const totalItems = cartItems.reduce((sum, item) => sum + (item.qty || item.quantity || 1), 0);
+                    badge.innerText = totalItems;
+                }
+            }
+            
+            // Handle order form submission
+            const orderForm = document.getElementById('order-form');
+            if (orderForm) {
+                orderForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Validate form
+                    const fullname = document.getElementById('fullname').value.trim();
+                    const phone = document.getElementById('phone').value.trim();
+                    const address = document.getElementById('address').value.trim();
+                    
+                    if (!fullname || !phone || !address) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+                    
+                    // Get cart items
+                    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                    
+                    if (cartItems.length === 0) {
+                        alert('Your cart is empty!');
+                        return;
+                    }
+                    
+                    // Get payment method
+                    const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+                    
+                    // Calculate total
+                    const total = cartItems.reduce((sum, item) => {
+                        const price = parseFloat(item.foodPrice || item.price || 0);
+                        const qty = parseInt(item.qty || item.quantity || 1);
+                        return sum + (price * qty);
+                    }, 0);
+                    
+                    // Create order object
+                    const order = {
+                        id: 'ORD' + Date.now(),
+                        customer: {
+                            name: fullname,
+                            phone: phone,
+                            email: document.getElementById('email').value.trim(),
+                            address: address
+                        },
+                        items: cartItems,
+                        total: total,
+                        paymentMethod: paymentMethod,
+                        orderDate: new Date().toISOString(),
+                        status: 'Pending'
+                    };
+                    
+                    // Save order to localStorage
+                    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                    orders.push(order);
+                    localStorage.setItem('orders', JSON.stringify(orders));
+                    
+                    // Clear cart
+                    localStorage.removeItem('cartItems');
+                    
+                    // Show success message
+                    alert('Order placed successfully! Your order ID is: ' + order.id);
+                    
+                    // Redirect to confirmation or home page
+                    window.location.href = 'order-confirmation.html?id=' + order.id;
+                });
+            }
+            
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const menuList = document.getElementById('menu-list');
+            
+            if (menuToggle && menuList) {
+                menuToggle.addEventListener('click', () => {
+                    menuList.classList.toggle('active');
+                    const icon = menuToggle.querySelector('i');
+                    if (menuList.classList.contains('active')) {
+                        icon.className = 'fas fa-times';
+                    } else {
+                        icon.className = 'fas fa-bars';
+                    }
+                });
+            }
+            
+            // Load order items when page loads
+            loadOrderItems();
+            
+            // Listen for storage changes (in case cart is updated in another tab)
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'cartItems') {
+                    loadOrderItems();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

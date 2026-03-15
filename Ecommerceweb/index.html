@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Food Delivery Website</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
+
+    <!-- Hover CSS -->
+    <link rel="stylesheet" href="css/hover-min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <nav id="site-top-nav" class="navbar-menu navbar-fixed-top">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html" title="Logo">
+                        <img src="image.png" alt="Logo" class="img-responsive">
+                    </a>
+                </div>
+                <div class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="menu text-right">
+                    <ul id="menu-list">
+                        <li><a class="hvr-underline-from-center" href="index.html">Home</a></li>
+                        <li><a class="hvr-underline-from-center" href="foods.html">Foods</a></li>
+                        <li><a class="hvr-underline-from-center" href="order.html">Order</a></li>
+                        <li><a class="hvr-underline-from-center" href="contact.html">Contact</a></li>
+                        <li style="position: relative;">
+                            <a id="shopping-cart" class="shopping-cart">
+                                <i class="fa fa-cart-arrow-down"></i>
+                                <span class="badge">0</span>
+                            </a>
+                            <div id="cart-content" class="cart-content">
+                                <!-- Cart will be populated dynamically -->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Food Search Section Start -->
+<section class="food-search text-center">
+    <div class="container">
+        <form id="search-form" onsubmit="return handleSearch(event)">
+            <input type="search" id="search-input" placeholder="Search for food..." required>
+            <input type="submit" value="Search" class="btn-primary">
+        </form>
+    </div>
+</section>
+
+    <section class="categories">
+        <div class="container">
+            <h2 class="text-center">Explore Foods</h2>
+            <div class="heading-border"></div>
+
+            <div class="grid-3">
+                <a href="foods.html?category=pizza">
+                    <div class="float-container">
+                        <img src="pizza(1).jpg" class="img-responsive" alt="Pizza">
+                        <h3 class="float-text text-white">Pizza</h3>
+                    </div>
+                </a>
+                <a href="foods.html?category=sandwich">
+                    <div class="float-container">
+                        <img src="sandwich.jpg" class="img-responsive" alt="Sandwich">
+                        <h3 class="float-text text-white">Sandwich</h3>
+                    </div>
+                </a>
+                <a href="foods.html?category=burger">
+                    <div class="float-container">
+                        <img src="burger.jpg" class="img-responsive" alt="Burger">
+                        <h3 class="float-text text-white">Burger</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Foods Section Start -->
+    <section class="food-menu">
+        <div class="container">
+            <h2 class="text-center">Highly Ordered Foods</h2>
+            <div class="heading-border"></div>
+            <div class="grid-2">
+                <div class="food-menu-box">
+                    <form class="add-to-cart-form">
+                        <div class="food-menu-img">
+                            <img src="pizza(1).jpg" alt="Pizza" class="img-responsive img-curve">
+                        </div>
+                        <div class="food-menu-desc">
+                            <h4>Pizza</h4>
+                            <p class="food-price">$8.00</p>
+                            <p class="food-details">Delicious cheese pizza with fresh toppings and crispy crust.</p>
+                            <input type="number" class="item-quantity" value="1" min="1">
+                            <input type="submit" class="btn-primary" value="Add To Cart">
+                        </div>
+                    </form>
+                </div>
+                <div class="food-menu-box">
+                    <form class="add-to-cart-form">
+                        <div class="food-menu-img">
+                            <img src="sandwich.jpg" alt="Sandwich" class="img-responsive img-curve">
+                        </div>
+                        <div class="food-menu-desc">
+                            <h4>Sandwich</h4>
+                            <p class="food-price">$8.00</p>
+                            <p class="food-details">Fresh bread with grilled vegetables and cheese.</p>
+                            <input type="number" class="item-quantity" value="1" min="1">
+                            <input type="submit" class="btn-primary" value="Add To Cart">
+                        </div>
+                    </form>
+                </div>
+                <div class="food-menu-box">
+                    <form class="add-to-cart-form">
+                        <div class="food-menu-img">
+                            <img src="burger.jpg" alt="Burger" class="img-responsive img-curve">
+                        </div>
+                        <div class="food-menu-desc">
+                            <h4>Burger</h4>
+                            <p class="food-price">$8.00</p>
+                            <p class="food-details">Juicy beef patty with fresh lettuce and tomatoes.</p>
+                            <input type="number" class="item-quantity" value="1" min="1">
+                            <input type="submit" class="btn-primary" value="Add To Cart">
+                        </div>
+                    </form>
+                </div>
+                <div class="food-menu-box">
+                    <form class="add-to-cart-form">
+                        <div class="food-menu-img">
+                            <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=500" alt="Shawarma" class="img-responsive img-curve">
+                        </div>
+                        <div class="food-menu-desc">
+                            <h4>Shawarma</h4>
+                            <p class="food-price">$8.00</p>
+                            <p class="food-details">Delicious shawarma with special sauce.</p>
+                            <input type="number" class="item-quantity" value="1" min="1">
+                            <input type="submit" class="btn-primary" value="Add To Cart">
+                        </div>
+                    </form>
+                </div>
+                <div class="food-menu-box">
+                    <form class="add-to-cart-form">
+                        <div class="food-menu-img">
+                            <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=500" alt="Fried Chicken" class="img-responsive img-curve">
+                        </div>
+                        <div class="food-menu-desc">
+                            <h4>Fried Chicken</h4>
+                            <p class="food-price">$8.00</p>
+                            <p class="food-details">Crispy fried chicken pieces.</p>
+                            <input type="number" class="item-quantity" value="1" min="1">
+                            <input type="submit" class="btn-primary" value="Add To Cart">
+                        </div>
+                    </form>
+                </div>
+                <div class="food-menu-box">
+                    <form class="add-to-cart-form">
+                        <div class="food-menu-img">
+                            <img src="https://images.unsplash.com/photo-1518013431117-eb1465fa5752?w=500" alt="French Fries" class="img-responsive img-curve">
+                        </div>
+                        <div class="food-menu-desc">
+                            <h4>French Fries</h4>
+                            <p class="food-price">$8.00</p>
+                            <p class="food-details">Crispy golden french fries.</p>
+                            <input type="number" class="item-quantity" value="1" min="1">
+                            <input type="submit" class="btn-primary" value="Add To Cart">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <p class="text-center">
+            <a href="foods.html" class="btn-primary">See All Foods</a>
+        </p>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About Us</h3>
+                <p>Welcome to Café Crush – Where Every Sip Sparks a Story! At Café Crush, we blend passion, flavor, and
+                    community into every cup we serve. Email: cafecrush3@gmail.com</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="foods.html">Foods</a></li>
+                    <li><a href="order.html">Order</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 All Rights Reserved | Designed by <a href="#">Vishal Mavinmar</a></p>
+        </div>
+    </footer>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <!-- Jquery UI -->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <!-- Custom JS -->
+    <script src="index.js"></script>
+</body>
+
+</html>

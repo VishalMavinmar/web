@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Foods - Online Food Delivery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="foods.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Search result styles */
+        .search-header {
+            text-align: center;
+            margin: 20px 0 30px;
+            padding: 20px;
+            background: #f9f5f0;
+            border-radius: 15px;
+        }
+        
+        .search-header h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .search-header p {
+            color: #666;
+        }
+        
+        .clear-search {
+            display: inline-block;
+            margin-left: 15px;
+            padding: 5px 15px;
+            background: #ff4444;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #cc0000;
+        }
+        
+        .no-results {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .no-results i {
+            font-size: 5rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .no-results h3 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .no-results p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .back-to-home {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #c49b63;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-home:hover {
+            background: #a47c44;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <nav class="navbar-menu">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="image.png" alt="Logo">
+                    </a>
+                </div>
+                <div class="menu text-right">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="foods.html">Foods</a></li>
+                        <li><a href="order.html">Order</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li style="position: relative;">
+                            <a id="shopping-cart" class="shopping-cart">
+                                <i class="fa fa-cart-arrow-down"></i>
+                                <span class="badge">0</span>
+                            </a>
+                            <div id="cart-content" class="cart-content">
+                                <!-- Cart items will be displayed here -->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <h1 class="title">Our Foods</h1>
+
+    <div class="grid-3">
+        <!-- Food items will be dynamically loaded by JavaScript -->
+    </div>
+
+    <div class="order-btn">
+        <a href="order.html">
+            <button class="proceed-btn">Proceed To Order</button>
+        </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="index.js"></script>
+    <script src="foods.js"></script>
+</body>
+
+</html>
